@@ -181,7 +181,9 @@
   .edu-degree { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); }
   .edu-school { font-size: .82rem; color: var(--muted); margin-top: .4rem; }
 
-  .lang-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .lang-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 3rem; }
+  @media (max-width: 700px) { .lang-row { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 400px) { .lang-row { grid-template-columns: 1fr; } }
   .lang-card { flex: 1; min-width: 160px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem; text-align: center; transition: border-color .2s, transform .2s; box-shadow: 0 2px 16px rgba(0,0,0,.04); }
   .lang-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .lang-flag { font-size: 2rem; margin-bottom: .7rem; display: block; }
@@ -363,7 +365,7 @@
     <span class="section-num">02</span>
     <h2 class="section-title">Mes<br><em>compétences</em></h2>
   </div>
-  <div style="display:grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 3rem;">
+  <div class="kpi-grid">
     <div class="kpi-card reveal">
       <div class="kpi-num">~100</div>
       <div class="kpi-label">Outils d'aide à la vente créés & gérés</div>
@@ -384,7 +386,7 @@
       <div class="kpi-label">Marchés internationaux adressés</div>
       <div class="kpi-sub">Création & brief des supports de vente adaptés — Europe, Maroc, Tunisie, Liban, Émirats</div>
     </div>
-    <div class="kpi-card reveal" style="grid-column: span 2;">
+    <div class="kpi-card reveal kpi-wide">
       <div class="kpi-num">↑↑</div>
       <div class="kpi-label">Relance réussie d'une gamme décorative en déclin</div>
       <div class="kpi-sub">Lancement de la gamme en juin 2024, nouveau produit en septembre 2024 — croissance enregistrée dès la première année, forte accélération l'année suivante</div>
@@ -445,8 +447,25 @@
     line-height: 1.6;
     text-align: justify;
   }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .kpi-wide { grid-column: span 2; }
+
   @media (max-width: 900px) {
-    .kpi-card[style*="span 2"] { grid-column: span 1; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .kpi-wide { grid-column: span 2; }
+    .kpi-num { font-size: 2.2rem; }
+  }
+  @media (max-width: 500px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .kpi-wide { grid-column: span 1; }
+    .kpi-num { font-size: 2rem; }
+    .kpi-label { font-size: .85rem; }
+    .kpi-sub { font-size: .78rem; }
   }
 </style>
 </section>
@@ -561,8 +580,11 @@
 <style>
   .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1.2rem;
+  }
+  @media (max-width: 500px) {
+    .tools-grid { grid-template-columns: 1fr 1fr; }
   }
   .tool-card {
     background: var(--surface);
